@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaundice Detection AI</title>
+
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts: Sora (headings) + DM Sans (body) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}?v=blue-cursor-11"
+    />
+    <script
+      src="{{ url_for('static', filename='js/script.js') }}?v=blue-cursor-11"
+      defer
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/auth-actions.js') }}"
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/contact.js') }}?v=blue-cursor-11"
+    ></script>
+  </head>
+
+  <body>
+    <!-- AMBIENT BACKGROUND -->
+    <div class="bg-canvas" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         NAVBAR
+    ═══════════════════════════════════════ -->
+    <header class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-sheen" aria-hidden="true"></div>
+
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons">local_hospital</span>
+          </div>
+          <span class="logo-text"
+            >Jaundice<span class="logo-dot">AI</span></span
+          >
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+        </ul>
+
+        <div class="nav-right">
+          <button
+            class="btn-primary nav-cta"
+            onclick="window.location.hash = '#contact'"
+          >
+            <span class="material-icons" style="font-size: 18px">
+              contact_support
+            </span>
+            <span>Contact Us</span>
+          </button>
+
+          <!-- PROFILE DROPDOWN -->
+          <div class="profile-wrapper">
+            <button
+              class="profile-btn"
+              id="profileToggle"
+              aria-label="Account menu"
+            >
+              <span class="material-icons">account_circle</span>
+            </button>
+            <div class="profile-menu" id="profileMenu" role="menu">
+              <a href="/profile" role="menuitem"
+                ><span class="material-icons">person</span>Edit Profile</a
+              >
+              <a href="/profile#settings" role="menuitem"
+                ><span class="material-icons">settings</span>Settings</a
+              >
+              <div class="menu-divider"></div>
+              <button id="logoutBtn" role="menuitem">
+                <span class="material-icons">logout</span>Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section id="hero" class="hero">
+      <div class="hero-inner">
+        <div class="hero-text reveal-up" style="--d: 0s">
+          <!-- Trust badge -->
+          <div class="trust-badge">
+            <span class="badge-dot"></span>
+            AI-Powered Clinical Screening Tool
+          </div>
+
+          <h1>
+            Early Jaundice<br />
+            <span class="gradient-text">Detection</span><br />
+            Powered by AI
+          </h1>
+
+          <p class="hero-sub">
+            Computer vision diagnostics for neonatal jaundice. Fast screening
+            accessible from any device — empowering clinicians everywhere.
+          </p>
+
+          <div class="hero-actions">
+            <button
+              class="btn-primary large auth-cta"
+              data-auth-label="Upload Image"
+              data-auth-icon="cloud_upload"
+              data-guest-label="Start Screening"
+              data-guest-icon="arrow_forward"
+              data-auth-href="{{ url_for('upload') }}"
+              data-guest-href="{{ url_for('login') }}"
+            >
+              <span class="cta-label">Start Screening</span>
+              <span class="material-icons">arrow_forward</span>
+            </button>
+            <button
+              class="btn-ghost large"
+              onclick="window.location.href = '/learn-more'"
+            >
+              Learn More
+            </button>
+          </div>
+
+          <!-- Stats row -->
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-num">94<span class="stat-sym">%</span></span>
+              <span class="stat-label">Accuracy</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat">
+              <span class="stat-num">&lt;3<span class="stat-sym">s</span></span>
+              <span class="stat-label">Analysis Time</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="stat">
+              <span class="stat-num">0<span class="stat-sym">$</span></span>
+              <span class="stat-label">Cost to Screen</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-up" style="--d: 0.15s">
+          <div class="hero-card-glow"></div>
+          <img
+            src="{{ url_for('static',
+filename='assets/doctor-image.png') }}"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         WHAT IS JAUNDICE
+    ═══════════════════════════════════════ -->
+    <section class="section" id="jaundice-info">
+      <div class="section-header">
+        <span class="section-label">The Condition</span>
+        <h2 class="section-title">What is Neonatal Jaundice?</h2>
+        <p class="section-sub">
+          Understanding the condition is the first step toward better outcomes
+          for newborns.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card reveal-up" style="--d: 0s">
+          <div class="card-icon-wrap amber">
+            <span class="material-icons">visibility</span>
+          </div>
+          <h3>Common Symptoms</h3>
+          <p>
+            Yellow discoloration of the skin and whites of the eyes — typically
+            appearing within the first few days after birth.
+          </p>
+        </div>
+
+        <div class="info-card reveal-up" style="--d: 0.1s">
+          <div class="card-icon-wrap blue">
+            <span class="material-icons">science</span>
+          </div>
+          <h3>Why It Happens</h3>
+          <p>
+            Excess bilirubin builds up in the blood because a newborn's liver
+            isn't yet fully developed enough to process it efficiently.
+          </p>
+        </div>
+
+        <div class="info-card reveal-up" style="--d: 0.2s">
+          <div class="card-icon-wrap green">
+            <span class="material-icons">medical_services</span>
+          </div>
+          <h3>Why Early Detection Matters</h3>
+          <p>
+            While most cases resolve on their own, severe jaundice can cause
+            neurological damage if untreated. Early screening enables timely
+            intervention.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         HOW IT WORKS
+    ═══════════════════════════════════════ -->
+    <section class="section" id="how-it-works">
+      <div class="section-header">
+        <span class="section-label">The Process</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub">
+          Three simple steps from photo to clinical insight.
+        </p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step reveal-up" style="--d: 0s">
+          <div class="step-num">01</div>
+          <div class="step-icon">
+            <span class="material-icons">cloud_upload</span>
+          </div>
+          <h3>Upload a Photo</h3>
+          <p>
+            Take or upload a clear photo of the newborn's face or sclera using
+            any smartphone or camera.
+          </p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="connector-line"></div>
+          <span class="material-icons">east</span>
+        </div>
+
+        <div class="step reveal-up" style="--d: 0.12s">
+          <div class="step-num">02</div>
+          <div class="step-icon">
+            <span class="material-icons">psychology</span>
+          </div>
+          <h3>AI Analysis</h3>
+          <p>
+            Our computer vision model analyses skin tone and eye coloration
+            patterns to detect jaundice indicators.
+          </p>
+        </div>
+
+        <div class="step-connector" aria-hidden="true">
+          <div class="connector-line"></div>
+          <span class="material-icons">east</span>
+        </div>
+
+        <div class="step reveal-up" style="--d: 0.24s">
+          <div class="step-num">03</div>
+          <div class="step-icon">
+            <span class="material-icons">assignment_turned_in</span>
+          </div>
+          <h3>Get Your Result</h3>
+          <p>
+            Receive a clear risk assessment with confidence score in under 3
+            seconds — ready to share with your care team.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════════ -->
+    <section class="section" id="about">
+      <div class="section-header">
+        <span class="section-label">About Us</span>
+        <h2 class="section-title">Built for the Frontline</h2>
+        <p class="section-sub">
+          Designed with clinicians, for clinicians — especially in
+          resource-limited settings.
+        </p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card reveal-up" style="--d: 0s">
+          <div class="card-icon-wrap purple">
+            <span class="material-icons">psychology</span>
+          </div>
+          <h3>AI Intelligence</h3>
+          <p>
+            Advanced computer vision models trained on diverse datasets analyse
+            skin tone and eye coloration for early jaundice indicators.
+          </p>
+        </div>
+
+        <div class="info-card reveal-up" style="--d: 0.1s">
+          <div class="card-icon-wrap blue">
+            <span class="material-icons">health_and_safety</span>
+          </div>
+          <h3>Clinical Decision Support</h3>
+          <p>
+            Designed as a decision-support tool for healthcare professionals —
+            faster preliminary assessments, not a replacement for clinical
+            judgment.
+          </p>
+        </div>
+
+        <div class="info-card reveal-up" style="--d: 0.2s">
+          <div class="card-icon-wrap green">
+            <span class="material-icons">public</span>
+          </div>
+          <h3>Global Access</h3>
+          <p>
+            Works on any common smartphone. Built to extend early screening into
+            remote and under-resourced regions worldwide.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════ -->
+    <section id="contact" class="section contact-section">
+      <div class="section-header">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-sub">
+          Have a question or want to collaborate? We'd love to hear from you.
+        </p>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="field">
+          <input type="email" id="contactEmail" placeholder=" " required />
+          <label>Email Address</label>
+        </div>
+        <div class="field">
+          <textarea
+            id="contactMessage"
+            rows="4"
+            placeholder=" "
+            required
+          ></textarea>
+          <label>Message</label>
+        </div>
+        <button type="submit" class="btn-primary full">
+          Send Message
+          <span class="material-icons">send</span>
+        </button>
+        <p id="contactStatus"></p>
+      </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <span class="material-icons">local_hospital</span>
+            </div>
+            <span class="logo-text"
+              >Jaundice<span class="logo-dot">AI</span></span
+            >
+          </div>
+          <p>
+            AI-powered neonatal jaundice screening. Early detection, better
+            outcomes.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/learn-more">Learn More</a>
+            <a href="/upload">Upload Image</a>
+            <a href="/result">Results</a>
+          </div>
+          <div class="footer-col">
+            <h4>Account</h4>
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+            <a href="/profile">Profile</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Jaundice Detection AI. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

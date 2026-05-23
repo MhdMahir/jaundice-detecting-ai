@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Result | Jaundice Detection AI</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script
+      src="{{ url_for('static', filename='js/script.js') }}"
+      defer
+    ></script>
+
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/auth-actions.js') }}"
+    ></script>
+  </head>
+  <body>
+    <div class="bg-canvas" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-sheen" aria-hidden="true"></div>
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons">local_hospital</span>
+          </div>
+          <span class="logo-text"
+            >Jaundice<span class="logo-dot">AI</span></span
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+        </ul>
+        <div class="nav-right">
+          <div class="profile-wrapper">
+            <button
+              class="profile-btn"
+              id="profileToggle"
+              aria-label="Account menu"
+            >
+              <span class="material-icons">account_circle</span>
+            </button>
+            <div class="profile-menu" id="profileMenu" role="menu">
+              <a href="/profile" role="menuitem"
+                ><span class="material-icons">person</span>Edit Profile</a
+              >
+              <a href="/profile#settings" role="menuitem"
+                ><span class="material-icons">settings</span>Settings</a
+              >
+              <div class="menu-divider"></div>
+              <button id="logoutBtn" role="menuitem">
+                <span class="material-icons">logout</span>Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- RESULT SECTION -->
+    <section class="upload-wrapper">
+      <div
+        class="upload-card result-card"
+        id="resultCard"
+        style="max-width: 960px; padding: 0"
+      >
+        <div class="result-layout">
+          <!-- LEFT: IMAGE -->
+          <div class="result-image-box">
+            <img id="resultImage" alt="Analysed Image" />
+          </div>
+
+          <!-- RIGHT: RESULT -->
+          <div class="result-content">
+            <!-- Status badge (filled by JS) -->
+            <div
+              id="resultBadge"
+              class="trust-badge"
+              style="margin-bottom: 16px"
+            ></div>
+
+            <h2>Detection Result</h2>
+
+            <p id="percentageText"></p>
+            <p id="confidenceText" class="confidence-score"></p>
+
+            <!-- Divider -->
+            <div
+              style="
+                height: 1px;
+                background: var(--glass-border);
+                margin: 8px 0;
+              "
+            ></div>
+
+            <p id="medicalHint" class="hint-text"></p>
+
+            <div class="result-actions">
+              <button
+                class="btn-ghost"
+                onclick="window.location.href = '/'"
+              >
+                <span class="material-icons" style="font-size: 18px">home</span>
+                Done
+              </button>
+              <button
+                class="btn-primary"
+                onclick="window.location.href = '/upload'"
+              >
+                <span class="material-icons" style="font-size: 18px"
+                  >refresh</span
+                >
+                Check Another
+              </button>
+            </div>
+
+            <!-- Disclaimer -->
+            <p
+              style="
+                margin-top: 20px;
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                line-height: 1.6;
+              "
+            >
+              ⚠️ This tool is for preliminary screening only. Always consult a
+              qualified healthcare professional for medical diagnosis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULT LOGIC -->
+    <script>
+      (function () {
+        const card = document.getElementById("resultCard");
+        const badge = document.getElementById("resultBadge");
+        const pctText = document.getElementById("percentageText");
+        const confText = document.getElementById("confidenceText");
+        const hintText = document.getElementById("medicalHint");
+        const resultImage = document.getElementById("resultImage");
+
+        // Load stored image
+        const image = localStorage.getItem("uploadedImage");
+        if (image) resultImage.src = image;
+
+        // Load prediction
+        let data = null;
+        try {
+          data = JSON.parse(localStorage.getItem("predictionResult"));
+        } catch (_) {}
+
+        if (!data || !data.prediction) {
+          pctText.textContent = "No result available.";
+          hintText.textContent =
+            "Please return to the upload page and try again.";
+          badge.innerHTML =
+            '<span class="badge-dot" style="background:var(--text-muted);box-shadow:none;"></span> No Data';
+          return;
+        }
+
+        // Confidence score
+        let conf =
+          data.confidence ?? data.confidence_score ?? data.probability ?? null;
+        if (conf !== null) {
+          if (conf <= 1) conf = conf * 100;
+          confText.textContent = `Model confidence: ${conf.toFixed(1)}%`;
+        }
+
+        // Outcome
+        const isPositive = data.prediction === "Jaundice Positive";
+
+        if (isPositive) {
+          card.classList.add("result-positive");
+          badge.style.background = "rgba(248,113,113,0.12)";
+          badge.style.borderColor = "rgba(248,113,113,0.4)";
+          badge.style.color = "#f87171";
+          badge.innerHTML =
+            '<span class="badge-dot" style="background:#f87171;box-shadow:0 0 8px #f87171;"></span> Positive Detection';
+          pctText.textContent = "Jaundice Positive";
+          pctText.style.color = "#f87171";
+          hintText.textContent =
+            "High probability of neonatal jaundice detected. Please consult a pediatrician immediately for a formal medical evaluation and bilirubin level test.";
+        } else {
+          card.classList.add("result-negative");
+          badge.style.background = "rgba(52,211,153,0.1)";
+          badge.style.borderColor = "rgba(52,211,153,0.35)";
+          badge.style.color = "#34d399";
+          badge.innerHTML =
+            '<span class="badge-dot" style="background:#34d399;box-shadow:0 0 8px #34d399;animation:pulse 2s infinite;"></span> Negative Detection';
+          pctText.textContent = "Jaundice Negative";
+          pctText.style.color = "#34d399";
+          hintText.textContent =
+            "No significant signs of neonatal jaundice detected in this image. Monitor the baby and consult a pediatrician if symptoms develop.";
+        }
+      })();
+    </script>
+  </body>
+</html>

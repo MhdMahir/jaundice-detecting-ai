@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn More | Jaundice Detection AI</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+  </head>
+  <body>
+    <div class="bg-canvas" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-sheen" aria-hidden="true"></div>
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons">local_hospital</span>
+          </div>
+          <span class="logo-text"
+            >Jaundice<span class="logo-dot">AI</span></span
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+        </ul>
+        <div class="nav-right">
+          <button
+            class="btn-ghost"
+            onclick="window.location.href = '/#contact'"
+          >
+            Contact
+          </button>
+          <button class="btn-primary" onclick="window.location.href = '/login'">
+            <span class="material-icons" style="font-size: 18px"
+              >rocket_launch</span
+            >
+            Get Started
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- PAGE HEADER -->
+    <section style="padding: 130px 24px 0; text-align: center">
+      <div class="section-header" style="margin-bottom: 0">
+        <span class="section-label">Documentation</span>
+        <h1 class="section-title" style="font-size: clamp(2.2rem, 4vw, 3.2rem)">
+          Learn More About<br /><span class="gradient-text"
+            >Jaundice Detection AI</span
+          >
+        </h1>
+        <p class="section-sub" style="max-width: 560px; margin: 16px auto 0">
+          Everything you need to know about neonatal jaundice, how our AI works,
+          and how to use the system safely.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="learn-wrapper">
+      <!-- ABOUT -->
+      <div class="learn-card reveal-up" style="--d: 0s">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="card-icon-wrap blue">
+            <span class="material-icons">info</span>
+          </div>
+          <h2 style="margin: 0">About Jaundice Detection AI</h2>
+        </div>
+        <p>
+          Jaundice Detection AI is an intelligent healthcare support system
+          designed to assist in the early detection of neonatal jaundice using
+          image-based analysis. The system uses computer vision and machine
+          learning to analyse visual cues from photos and provide fast,
+          accessible screening support — even in resource-limited settings.
+        </p>
+      </div>
+
+      <!-- WHY IT MATTERS -->
+      <div class="learn-card reveal-up" style="--d: 0.05s">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="card-icon-wrap amber">
+            <span class="material-icons">priority_high</span>
+          </div>
+          <h3 style="margin: 0">Why Early Jaundice Detection Matters</h3>
+        </div>
+        <p>
+          Neonatal jaundice affects up to 60% of full-term newborns and 80% of
+          preterm infants in the first week of life. While most cases are mild
+          and resolve without treatment, high bilirubin levels left undetected
+          can lead to serious neurological complications including kernicterus —
+          a form of permanent brain damage. Early screening dramatically
+          improves outcomes.
+        </p>
+      </div>
+
+      <!-- HOW IT WORKS -->
+      <div class="learn-card reveal-up" style="--d: 0.1s">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="card-icon-wrap green">
+            <span class="material-icons">account_tree</span>
+          </div>
+          <h3 style="margin: 0">How the System Works</h3>
+        </div>
+        <ul
+          style="
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding-left: 0;
+            list-style: none;
+          "
+        >
+          <li style="display: flex; gap: 12px; align-items: flex-start">
+            <span
+              style="
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--blue-300);
+                font-weight: 700;
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border-radius: var(--r-pill);
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >01</span
+            >
+            <span style="color: var(--text-secondary); font-size: 0.93rem"
+              >A clear photo of the newborn (face or full body) is uploaded via
+              any smartphone or browser.</span
+            >
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start">
+            <span
+              style="
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--blue-300);
+                font-weight: 700;
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border-radius: var(--r-pill);
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >02</span
+            >
+            <span style="color: var(--text-secondary); font-size: 0.93rem"
+              >The image is sent to our backend, where a trained AI model
+              processes it using computer vision.</span
+            >
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start">
+            <span
+              style="
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--blue-300);
+                font-weight: 700;
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border-radius: var(--r-pill);
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >03</span
+            >
+            <span style="color: var(--text-secondary); font-size: 0.93rem"
+              >The model evaluates colour patterns in the skin and sclera
+              (whites of the eyes) associated with bilirubin accumulation.</span
+            >
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start">
+            <span
+              style="
+                background: rgba(59, 130, 246, 0.15);
+                color: var(--blue-300);
+                font-weight: 700;
+                font-size: 0.8rem;
+                padding: 4px 10px;
+                border-radius: var(--r-pill);
+                flex-shrink: 0;
+                margin-top: 2px;
+              "
+              >04</span
+            >
+            <span style="color: var(--text-secondary); font-size: 0.93rem"
+              >A preliminary result (Positive / Negative) with a confidence
+              score is returned in under 3 seconds.</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- TECHNOLOGY -->
+      <div class="learn-card reveal-up" style="--d: 0.15s">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="card-icon-wrap purple">
+            <span class="material-icons">psychology</span>
+          </div>
+          <h3 style="margin: 0">Technology Behind the System</h3>
+        </div>
+        <p>
+          The project integrates a custom-trained convolutional neural network
+          (CNN) built on a Graph Convolutional Network (GCN) architecture for
+          robust feature extraction. The model was trained on a labelled dataset
+          of neonatal images across diverse skin tones to maximise accuracy and
+          fairness. The backend is built with Python (Flask), and the frontend
+          communicates with the model via a REST API.
+        </p>
+      </div>
+
+      <!-- DISCLAIMER -->
+      <div
+        class="learn-card reveal-up"
+        style="--d: 0.2s; border-color: rgba(248, 113, 113, 0.3)"
+      >
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div
+            class="card-icon-wrap"
+            style="
+              background: linear-gradient(135deg, #ef4444, #b91c1c);
+              box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35);
+            "
+          >
+            <span class="material-icons">warning_amber</span>
+          </div>
+          <h3 style="margin: 0; color: var(--text-primary)">
+            Important Disclaimer
+          </h3>
+        </div>
+        <p style="color: rgba(248, 113, 113, 0.85)">
+          This system is a
+          <strong style="color: #f87171">decision-support tool only</strong> and
+          does not replace professional medical diagnosis. Results should always
+          be reviewed and confirmed by a qualified healthcare professional. In
+          all cases of suspected jaundice, a formal serum bilirubin test is
+          required.
+        </p>
+      </div>
+
+      <!-- WHO CAN USE -->
+      <div class="learn-card reveal-up" style="--d: 0.25s">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+          "
+        >
+          <div class="card-icon-wrap green">
+            <span class="material-icons">groups</span>
+          </div>
+          <h3 style="margin: 0">Who Can Use This System</h3>
+        </div>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 4px;
+          "
+        >
+          <div
+            style="
+              padding: 18px;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid var(--glass-border);
+              border-radius: var(--r-md);
+            "
+          >
+            <span
+              class="material-icons"
+              style="
+                color: var(--blue-300);
+                font-size: 28px;
+                margin-bottom: 8px;
+                display: block;
+              "
+              >family_restroom</span
+            >
+            <h4
+              style="
+                font-size: 0.9rem;
+                color: var(--text-primary);
+                margin-bottom: 6px;
+              "
+            >
+              Parents & Caregivers
+            </h4>
+            <p style="font-size: 0.83rem">
+              Seeking early at-home screening support for their newborn.
+            </p>
+          </div>
+          <div
+            style="
+              padding: 18px;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid var(--glass-border);
+              border-radius: var(--r-md);
+            "
+          >
+            <span
+              class="material-icons"
+              style="
+                color: var(--blue-300);
+                font-size: 28px;
+                margin-bottom: 8px;
+                display: block;
+              "
+              >medical_services</span
+            >
+            <h4
+              style="
+                font-size: 0.9rem;
+                color: var(--text-primary);
+                margin-bottom: 6px;
+              "
+            >
+              Healthcare Professionals
+            </h4>
+            <p style="font-size: 0.83rem">
+              For rapid preliminary assessment in clinical or field settings.
+            </p>
+          </div>
+          <div
+            style="
+              padding: 18px;
+              background: rgba(255, 255, 255, 0.03);
+              border: 1px solid var(--glass-border);
+              border-radius: var(--r-md);
+            "
+          >
+            <span
+              class="material-icons"
+              style="
+                color: var(--blue-300);
+                font-size: 28px;
+                margin-bottom: 8px;
+                display: block;
+              "
+              >school</span
+            >
+            <h4
+              style="
+                font-size: 0.9rem;
+                color: var(--text-primary);
+                margin-bottom: 6px;
+              "
+            >
+              Researchers & Students
+            </h4>
+            <p style="font-size: 0.83rem">
+              Exploring AI applications in neonatal and diagnostic medicine.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div
+        class="learn-card reveal-up"
+        style="
+          --d: 0.3s;
+          text-align: center;
+          background: linear-gradient(
+            135deg,
+            rgba(37, 99, 235, 0.15),
+            rgba(30, 64, 175, 0.1)
+          );
+        "
+      >
+        <h3 style="margin-bottom: 12px">Ready to try it?</h3>
+        <p style="margin-bottom: 28px">
+          Create a free account and run your first jaundice screen in under a
+          minute.
+        </p>
+        <div
+          style="
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <button
+            class="btn-primary large"
+            onclick="window.location.href = '/login'"
+          >
+            <span class="material-icons" style="font-size: 18px"
+              >rocket_launch</span
+            >
+            Get Started
+          </button>
+          <button
+            class="btn-ghost large"
+            onclick="window.location.href = '/'"
+          >
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-icon">
+              <span class="material-icons">local_hospital</span>
+            </div>
+            <span class="logo-text"
+              >Jaundice<span class="logo-dot">AI</span></span
+            >
+          </div>
+          <p>
+            AI-powered neonatal jaundice screening. Early detection, better
+            outcomes.
+          </p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <a href="/learn-more">Learn More</a>
+            <a href="/upload">Upload Image</a>
+          </div>
+          <div class="footer-col">
+            <h4>Account</h4>
+            <a href="/login">Login</a>
+            <a href="/signup">Sign Up</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="/#about">About</a>
+            <a href="/#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Jaundice Detection AI. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

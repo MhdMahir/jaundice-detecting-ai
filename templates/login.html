@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Jaundice Detection AI</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script
+      src="{{ url_for('static', filename='js/script.js') }}"
+      defer
+    ></script>
+  </head>
+  <body class="login-page">
+    <div class="bg-canvas" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-sheen" aria-hidden="true"></div>
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons">local_hospital</span>
+          </div>
+          <span class="logo-text"
+            >Jaundice<span class="logo-dot">AI</span></span
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+        </ul>
+        <div class="nav-right">
+          <button
+            class="btn-ghost"
+            onclick="window.location.href = '/#contact'"
+          >
+            Contact
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- LOGIN -->
+    <section class="login-wrapper">
+      <div class="login-card">
+        <!-- LEFT IMAGE -->
+        <div class="login-image">
+          <img
+            src="{{ url_for('static',
+filename='assets/download.jfif') }}"
+          />
+          <div class="login-image-overlay"></div>
+        </div>
+
+        <!-- RIGHT FORM -->
+        <div class="login-form">
+          <div class="trust-badge" style="margin-bottom: 20px">
+            <span class="badge-dot"></span>
+            Secure Login
+          </div>
+
+          <h2>Welcome<br /><span class="gradient-text">Back</span></h2>
+          <p class="form-sub">Sign in to access your screening dashboard.</p>
+
+          <form id="loginForm" novalidate>
+            <div class="field">
+              <input
+                id="loginIdentifier"
+                type="text"
+                placeholder=" "
+                autocomplete="username"
+              />
+              <label>Email or Phone Number</label>
+            </div>
+
+            <div class="field">
+              <input
+                id="password"
+                type="password"
+                placeholder=" "
+                autocomplete="current-password"
+              />
+              <label>Password</label>
+            </div>
+
+            <div class="login-options">
+              <a href="/forgot-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" id="loginBtn" class="btn-primary full">
+              <span class="material-icons" style="font-size: 18px">login</span>
+              Login
+            </button>
+
+            <small
+              id="loginMessage"
+              class="form-error"
+              aria-live="polite"
+            ></small>
+
+            <div class="divider-row">or</div>
+
+            <button
+              type="button"
+              id="googleBtn"
+              class="btn-ghost full google-btn"
+            >
+              <img
+                src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                alt="Google"
+              />
+              Sign in with Google
+            </button>
+
+            <p class="signup-text">
+              Don't have an account? <a href="/signup">Sign Up</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/login.js') }}"
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload Image | Jaundice Detection AI</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script type="module" src="{{ url_for('static', filename='js/auth-actions.js') }}"></script>
+  </head>
+  <body>
+    <div class="bg-canvas" aria-hidden="true">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar-wrapper">
+      <nav class="navbar">
+        <div class="nav-sheen" aria-hidden="true"></div>
+        <div class="logo">
+          <div class="logo-icon">
+            <span class="material-icons">local_hospital</span>
+          </div>
+          <span class="logo-text"
+            >Jaundice<span class="logo-dot">AI</span></span
+          >
+        </div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+        </ul>
+        <div class="nav-right">
+          <button
+            class="btn-ghost"
+            onclick="window.location.href = '/'"
+          >
+            <span class="material-icons" style="font-size: 18px">home</span>
+            Home
+          </button>
+          <div class="profile-wrapper">
+            <button
+              class="profile-btn"
+              id="profileToggle"
+              aria-label="Account menu"
+            >
+              <span class="material-icons">account_circle</span>
+            </button>
+            <div class="profile-menu" id="profileMenu" role="menu">
+              <a href="/profile" role="menuitem"
+                ><span class="material-icons">person</span>Edit Profile</a
+              >
+              <a href="/profile#settings" role="menuitem"
+                ><span class="material-icons">settings</span>Settings</a
+              >
+              <div class="menu-divider"></div>
+              <button id="logoutBtn" role="menuitem">
+                <span class="material-icons">logout</span>Log Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- UPLOAD SECTION -->
+    <section class="upload-wrapper">
+      <div class="upload-card">
+        <!-- Header -->
+        <div
+          class="card-icon-wrap blue"
+          style="
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            margin: 0 auto 20px;
+          "
+        >
+          <span class="material-icons" style="font-size: 30px"
+            >cloud_upload</span
+          >
+        </div>
+
+        <h2>Upload Image</h2>
+        <p class="upload-text">
+          Upload a clear photo of the newborn's face or body<br />
+          for AI-powered jaundice screening.
+        </p>
+
+        <form class="upload-form" onsubmit="return false;">
+          <!-- Hidden file input -->
+          <input
+            type="file"
+            id="imageInput"
+            accept="image/*"
+            multiple
+            style="display: none"
+          />
+
+          <!-- Drop zone / upload trigger -->
+          <label for="imageInput" class="upload-drop-zone">
+            <span class="material-icons">add_photo_alternate</span>
+            <strong style="color: var(--text-primary); font-size: 0.95rem"
+              >Click to choose an image</strong
+            >
+            <span>JPG, PNG, WEBP supported</span>
+          </label>
+
+          <!-- Preview grid -->
+          <div class="upload-preview" id="uploadPreview"></div>
+
+          <!-- Submit -->
+          <button
+            type="button"
+            onclick="uploadImage()"
+            class="btn-primary full"
+          >
+            <span class="material-icons" style="font-size: 18px">biotech</span>
+            Analyse Image
+          </button>
+
+          <p
+            id="errorMsg"
+            style="
+              color: var(--red-400);
+              font-size: 0.85rem;
+              font-weight: 600;
+              display: none;
+              margin-top: -8px;
+            "
+          >
+            Please upload an image before submitting.
+          </p>
+        </form>
+
+        <!-- Tips -->
+        <div
+          style="
+            margin-top: 28px;
+            padding: 20px;
+            border-radius: var(--r-md);
+            background: rgba(59, 130, 246, 0.06);
+            border: 1px solid var(--glass-border);
+            text-align: left;
+          "
+        >
+          <p
+            style="
+              font-size: 0.8rem;
+              font-weight: 700;
+              color: var(--blue-300);
+              margin-bottom: 10px;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+            "
+          >
+            📷 Tips for best results
+          </p>
+          <ul
+            style="
+              padding-left: 16px;
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+            "
+          >
+            <li style="font-size: 0.82rem; color: var(--text-secondary)">
+              Use natural or bright indoor lighting
+            </li>
+            <li style="font-size: 0.82rem; color: var(--text-secondary)">
+              Ensure the baby's skin and eyes are clearly visible
+            </li>
+            <li style="font-size: 0.82rem; color: var(--text-secondary)">
+              Avoid blurry or heavily filtered photos
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
